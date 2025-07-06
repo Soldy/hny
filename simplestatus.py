@@ -12,18 +12,40 @@ class SimpleStatus:
         self.pos_y = str(posy_)
         self.max = max_
         self.current = 0
+        self.separator = ' '
+    def percentage(self):
+        if self.max == 0:
+           return str('  0%')
+        return (
+          str(int((self.current/self.max)*100)).rjust(3)+
+          '%'
+        )
+    def bar(self):
+        bar = ('          ')
+        if self.max != 0:
+           bar = ('='*(
+             int((self.current/self.max)*10)
+           )).ljust(10)
+        return (
+          '['+
+          bar+
+          ']'+
+        )
+    def statusText(self):
+        return (
+          str(self.current)+
+          '/'+
+          str(self.max)
+        )
     def generate(self):
         return (
           self.title+
-          ' ['+
-          ('='*int((self.current/self.max)*10)).ljust(10)+
-          ']  '+
-          str(self.current)+
-          '/'+
-          str(self.max)+
-          ' '+
-          str(int((self.current/self.max)*100))+
-          '%'
+          self.separator+
+          self.bar()+
+          self.separator+
+          self.statusText+
+          self.separator+
+          self.percentage()
         )
     def write(self):
         print(
