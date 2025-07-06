@@ -20,10 +20,10 @@ class SimpleStatus:
     def percentage(self):
         if self.max == 0:
            return str('  0%')
-        return (
-          str(int((self.current/self.max)*100)).rjust(3)+
+        return ''.join([
+          str(int((self.current/self.max)*100)).rjust(3),
           '%'
-        )
+        ])
 
     def bar(self):
         bar = ('          ')
@@ -31,37 +31,36 @@ class SimpleStatus:
            bar = ('='*(
              int((self.current/self.max)*10)
            )).ljust(10)
-        return (
-          '['+
-          bar+
-          ']'+
-        )
+        return ''.join([
+          '[',
+          bar,
+          ']'
+        ])
 
     def statusText(self):
-        return (
-          str(self.current)+
-          '/'+
-          str(self.max)
-        )
+        return ''.join([
+          str(self.current),
+          '/',
+          str(self.max),
+        ])
 
     def generate(self):
-        return (
-          self.title+
-          self.separator+
-          self.bar()+
-          self.separator+
-          self.statusText+
-          self.separator+
+        return self.separator.join([
+          self.title,
+          self.bar(),
+          self.statusText(),
           self.percentage()
-        )
+        ])
 
     def write(self):
         print(
-          '\x1b['+
-          str(self.pos_x)+
-          ';'+
-          str(self.pos_y)+
-          'H'+
+          (
+            '\x1b['+
+            str(self.pos_x)+
+            ';'+
+            str(self.pos_y)+
+            'H'
+          ),
           self.generate()
         )
 
