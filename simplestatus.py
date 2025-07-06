@@ -34,5 +34,10 @@ class SimpleStatus:
           'H'+
           self.generate()
         )
+
     def update(self, current_):
         self.current = current_
+
+    def increase(self):
+        self.current = self.current + 1
+        self.write()
