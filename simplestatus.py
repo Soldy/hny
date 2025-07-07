@@ -56,9 +56,9 @@ class SimpleStatus:
         print(
           (
             '\x1b['+
-            str(self.pos_x)+
-            ';'+
             str(self.pos_y)+
+            ';'+
+            str(self.pos_x)+
             'H'
           ),
           self.generate()
