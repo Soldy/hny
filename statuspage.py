@@ -1,5 +1,8 @@
 
-class StatusPageClass:
+from hny.simplestatus import SimpleStatus
+
+
+class StatusPage:
     def __init__(self, title_, bars_):
         self.__inited = {}
         self.__bar_details = {}
